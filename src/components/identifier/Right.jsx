@@ -43,28 +43,7 @@ const RightSideUI = () => {
   }, []);
 
   // Open camera automatically when in "camera" mode
-  useEffect(() => {
-    if (mode === "camera") {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          if (webcamRef.current) {
-            webcamRef.current.srcObject = stream;
-          }
-        })
-        .catch((err) => {
-          console.error("Error accessing camera:", err);
-        });
-    } else {
-      // Stop camera when switching to upload
-      if (webcamRef.current && webcamRef.current.srcObject) {
-        webcamRef.current.srcObject
-          .getTracks()
-          .forEach((track) => track.stop());
-        webcamRef.current.srcObject = null;
-      }
-    }
-  }, [mode]);
+  
 
   const capturePhoto = () => {
     const imageSrc = webcamRef.current.getScreenshot();
